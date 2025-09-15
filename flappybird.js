@@ -69,10 +69,13 @@ window.onload = function () {
   setInterval(placePipes, 1500); //place a new pipe every 1.5 seconds
   document.addEventListener("keydown", moveBird); //move bird when a key is pressed
 
-  // Lägg till touch-stöd för mobil
-  document.addEventListener("touchstart", function () {
-    moveBird({ code: "Space" });
-  });
+  // Lägg till touch-stöd för mobil + surfplatta
+  board.addEventListener("touchstart",function (e) {
+      e.preventDefault(); // förhindra scroll/zoom
+      moveBird({ code: "Space" }); // återanvänd samma logik som tangentbord
+    },
+    { passive: false }
+  );
 };
 
 function update() {
