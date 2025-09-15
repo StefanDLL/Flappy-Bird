@@ -36,6 +36,8 @@ let gravity = 0.2; //gravity or how fast the bird falls
 let gameOver = false;
 let score = 0;
 
+let canRestart = true;
+
 //when our page loads use for, example to draw the game
 window.onload = function () {
   board = document.getElementById("board");
@@ -126,9 +128,13 @@ function update() {
   context.font = "45px sans-serif";
   context.fillText(score, 5, 45);
 
+  // instruktionstext mindre och till höger om poängen
+  context.font = "10px sans-serif";
+  context.fillText("Windows Space, X, ArrowUp To Jump", 60, 40);
+
   if (gameOver) {
     // context.fillStyle = "black";
-    // context.font = "20px sans-serif";
+    context.font = "30px sans-serif";
     context.fillText("Game Over!", 5, 90);
   }
 }
@@ -169,12 +175,15 @@ function moveBird(e) {
     //jump
     velocityY = -5; //move up 6 pixels
 
-    //reset game if it's over
-    if (gameOver) {
-      bird.y = birdY;
-      pipeArray = [];
-      score = 0;
-      gameOver = false;
+    if (gameOver && canRestart) {
+      canRestart = false; // förhindra direkt omstart
+      setTimeout(() => {
+        bird.y = birdY;
+        pipeArray = [];
+        score = 0;
+        gameOver = false;
+        canRestart = true; // tillåt omstart igen efter fördröjning
+      }, 1000); // 1000 ms = 1 sekund fördröjning
     }
   }
 }
