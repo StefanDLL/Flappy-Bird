@@ -1,6 +1,6 @@
 //board
 let board;
-let boardWidth = 660;
+let boardWidth = 360;
 let boardHeight = 640;
 let context;
 
@@ -65,7 +65,7 @@ window.onload = function () {
   // callback function to update the board, används för att skapa animationer i webbläsaren direkt i js.filen
   requestAnimationFrame(update);
   setInterval(placePipes, 1500); //place a new pipe every 1.5 seconds
-  document.addEventListener("keydown", movieBird); //move bird when a key is pressed
+  document.addEventListener("keydown", moveBird); //move bird when a key is pressed
 };
 
 function update() {
@@ -164,7 +164,7 @@ function placePipes() {
   pipeArray.push(bottomPipe); //add a new pipe to the array
 }
 
-function movieBird(e) {
+function moveBird(e) {
   if (e.code == "Space" || e.code == "ArrowUp" || e.code == "KeyX") {
     //jump
     velocityY = -5; //move up 6 pixels
