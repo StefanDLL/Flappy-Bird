@@ -68,6 +68,11 @@ window.onload = function () {
   requestAnimationFrame(update);
   setInterval(placePipes, 1500); //place a new pipe every 1.5 seconds
   document.addEventListener("keydown", moveBird); //move bird when a key is pressed
+
+  // Lägg till touch-stöd för mobil
+  document.addEventListener("touchstart", function () {
+    moveBird({ code: "Space" });
+  });
 };
 
 function update() {
